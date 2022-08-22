@@ -3,6 +3,15 @@ import pandas as pd
 
 PATH = '../raw_data/wildfires.csv'
 
+def counts_per_year(df):
+    '''
+    Calculates yearly amount of wildfires for each US state between 1992 and 2015
+    '''
+    fires_per_year = df.groupby(['STATE','FIRE_YEAR']).count()
+    fires_per_year = fires_per_year['OBJECTID']
+
+    return fires_per_year
+
 def counts_per_state(df):
     '''
     Calculates total amount of wildfires for each US state between 1992 and 2015
@@ -22,9 +31,10 @@ def load_df(path=PATH):
 
 def get_counts():
     df = load_df()
-    number_of_fires = counts_per_state(df)
+    #number_of_fires = counts_per_state(df)
+    fires_per_year = counts_per_year(df)
 
-    return number_of_fires
+    return fires_per_year
 
 
 if __name__ == "__main__":
